@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Keyboard } from 'swiper';
+import { Navigation, Pagination, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -52,7 +52,7 @@ export default function Carousel({ slides }) {
       keyboard={{ enabled: true }}
       spaceBetween={50}
       slidesPerView={1}
-      style={{ height: '100vh' }}
+      style={{ width: '100%', height: '600px' }}
     >
       {slides.map(s => (
         <SwiperSlide key={s.id}>
@@ -60,7 +60,7 @@ export default function Carousel({ slides }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '100%'
+            height: '600px'
           }}>
             <SlideCard slide={s} />
           </div>
