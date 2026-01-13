@@ -1,5 +1,5 @@
 import Carousel from './components/Carousel';
-import slides from './data/slides.json';
+import slides from './data/slides.js';
 
 function App() {
   return (
