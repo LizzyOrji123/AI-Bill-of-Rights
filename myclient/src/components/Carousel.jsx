@@ -5,20 +5,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const SlideCard = ({ slide }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, padding: 20 }}>
-    <h1 style={{ margin: 0, fontSize: 32, fontWeight: 'bold', textAlign: 'center' }}>{slide.title}</h1>
-    <img src={slide.image} alt={slide.title} style={{ maxWidth: '90%', height: 'auto', borderRadius: 8 }} />
-    <div style={{ maxWidth: 900, padding: 10, fontSize: 18, lineHeight: 1.5, textAlign: 'center' }}>{slide.content}</div>
-    {slide.linkedin && (
-      <a href={slide.linkedin} target="_blank" rel="noopener noreferrer"
-         style={{ marginTop: 20, padding: '12px 24px', backgroundColor: '#007aff', color: '#fff',
-                  borderRadius: 6, textDecoration: 'none', fontWeight: 'bold' }}>
-        Visit my LinkedIn
-      </a>
-    )}
-  </div>
-);
+// ✅ Import your static slides file if you want a fallback
+import localSlides from '../data/slides.js';
+
+// ✅ Import SlideCard from its own file
+import SlideCard from './SlideCard';
 
 export default function Carousel() {
   const [slides, setSlides] = useState([]);
@@ -27,8 +18,19 @@ export default function Carousel() {
     fetch('http://localhost:5000/api/slides')
       .then(res => res.json())
       .then(data => setSlides(data))
-      .catch(err => console.error('Error fetching slides:', err));
+      .catch(err => {
+        console.error('Error fetching slides:', err);
+        // ✅ fallback to local slides if API fails
+        setSlides(localSlides);
+      });
   }, []);
+
+  console.log("Slides:", slides);
+
+  // ✅ Loading fallback
+  if (!Array.isArray(slides) || slides.length === 0) {
+    return <div style={{ textAlign: 'center', padding: 50 }}>Loading slides…</div>;
+  }
 
   return (
     <Swiper
@@ -40,7 +42,7 @@ export default function Carousel() {
       slidesPerView={1}
       style={{ width: '100%', height: '100vh' }}
     >
-      {slides.map(s => (
+      {slides.map((s) => (
         <SwiperSlide key={s.id}>
           <SlideCard slide={s} />
         </SwiperSlide>
