@@ -4,6 +4,7 @@ import { Navigation, Pagination, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import '../App.css';
 
 // ✅ Import your static slides file if you want a fallback
 import localSlides from '../data/slides.js';
@@ -15,9 +16,13 @@ export default function Carousel() {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
+    console.log("Fetching slides...");
     fetch('http://localhost:5000/api/slides')
       .then(res => res.json())
-      .then(data => setSlides(data))
+      .then(data => { 
+        console.log("Slides fetched:", data); 
+        setSlides(localSlides); 
+      })
       .catch(err => {
         console.error('Error fetching slides:', err);
         // ✅ fallback to local slides if API fails
@@ -33,21 +38,22 @@ export default function Carousel() {
   }
 
   return (
-    <Swiper
-      modules={[Navigation, Pagination, Keyboard]}
-      navigation
-      pagination={{ clickable: true }}
-      keyboard={{ enabled: true }}
-      spaceBetween={50}
-      slidesPerView={1}
-      style={{ width: '100%', height: '100vh' }}
-    >
-      {slides.map((s) => (
-        <SwiperSlide key={s.id}>
-          <SlideCard slide={s} />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className="app-wrapper">
+      <Swiper
+        modules={[Navigation, Pagination, Keyboard]}
+        navigation
+        pagination={{ clickable: true }}
+        keyboard={{ enabled: true }}
+        spaceBetween={50}
+        slidesPerView={1}
+      >
+        {slides.map(slide => (
+          <SwiperSlide key={slide.id}>
+            <SlideCard slide={slide} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>  
   );
 }
 

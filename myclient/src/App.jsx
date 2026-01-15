@@ -1,12 +1,8 @@
 import Carousel from './components/Carousel';
 
 function App() {
-  return (
-    <div>
-       <Carousel />
-    </div>
-  );
+  console.log("App is rendering");
+  return <Carousel />;
 }
 
 export default App;
-
