@@ -21,15 +21,17 @@ html, body, #root {
 .slide-card {
   max-width: 800px;
   text-align: center;
+  padding: 20px;
 }
 
-
+.slide-card h1 { 
+  font-size: 1.5rem; /* ~24px */ 
+  margin-bottom: 15px; 
+}
 
 body {
   display: block !important;   /* force normal block flow */
 }
-
-
 
 .app-wrapper {
   display: flex;
@@ -43,4 +45,41 @@ body {
   height: auto;       /* keep aspect ratio */
   border-radius: 8px;
   margin-bottom: 20px;
+}
+
+.slide-card p {
+  font-size: 1rem; /* ~16px */
+  margin-bottom: 15px;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 600px) {
+  .slide-card {
+    max-width: 600px;
+    padding: 30px;
+  }
+
+  .slide-card h1 {
+    font-size: 2rem; /* ~32px */
+  }
+
+  .slide-card p {
+    font-size: 1.125rem; /* ~18px */
+  }
+}
+
+/* Laptop/Desktop breakpoint */
+@media (min-width: 1024px) {
+  .slide-card {
+    max-width: 800px;
+    padding: 40px;
+  }
+
+  .slide-card h1 {
+    font-size: 2.25rem; /* ~36px */
+  }
+
+  .slide-card p {
+    font-size: 1.25rem; /* ~20px */
+  }
 }
