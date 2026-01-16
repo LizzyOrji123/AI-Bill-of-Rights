@@ -37,3 +37,10 @@ body {
   align-items: center;
   min-height: 100vh;
 }
+
+.slide-card img {
+  max-width: 600px;   /* limit width */
+  height: auto;       /* keep aspect ratio */
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
