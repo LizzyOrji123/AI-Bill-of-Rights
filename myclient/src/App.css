@@ -41,7 +41,7 @@ body {
 }
 
 .slide-card img {
-  max-width: 600px;   /* limit width */
+  width: 100%;
   height: auto;       /* keep aspect ratio */
   border-radius: 8px;
   margin-bottom: 20px;
@@ -82,4 +82,10 @@ body {
   .slide-card p {
     font-size: 1.25rem; /* ~20px */
   }
+}
+
+.carousel {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
